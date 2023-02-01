@@ -1,9 +1,12 @@
 import './App.css';
+import { UserProvider } from './Auth/UserContext';
 import Main from './Layout/Main';
 
 function App() {
   return (
-    <Main/>
+    <UserProvider>
+      <Main/>
+    </UserProvider>
   );
 }
 
