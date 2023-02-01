@@ -1,14 +1,35 @@
 import { useState } from "react"
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 
 const Tla = () => {
     const [soalSatu, setSoalSatu] = useState("");
+    const [soalDua, setSoalDua] = useState([]);
+    function hitung_huruf(str){
+        let result = [];
+        for (let i=0; i<str.length; i++){
+            let count = 0;
+            for (let j=0; j<str.length; j++){
+                if(str[i] == str[j] && i > j){
+                    break;
+                }
+                if( str[i] == str[j]){
+                    count++;
+                }
+            }
+            if (count > 0)
+            result.push(`${str[i]} = ${count}, `);
+            // console.log(`${str[i]} = ${count}`);     
+        }
+        setSoalDua(result);
+    }
 
     const onFinish = (values) => {
         let jawabanSatu = values.soalSatu.toLowerCase().replace(/[^\w\s]/gi, '').replaceAll(" ", "-");
         setSoalSatu(jawabanSatu);
 
-        console.log(jawabanSatu);
+        hitung_huruf(values.soalDua);
+
+        // console.log(jawabanDua);
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -97,6 +118,7 @@ koma (,), ex. “20, 21, 80, 21, 55, 31, 22” ) </p>
 
             <h1>Jawaban</h1>
             <p>1. {soalSatu}</p>
+            <p>2. {soalDua}</p>
 
         </>
     )
