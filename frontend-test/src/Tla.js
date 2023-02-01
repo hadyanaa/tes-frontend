@@ -4,6 +4,9 @@ import { Button, Form, Input } from 'antd';
 const Tla = () => {
     const [soalSatu, setSoalSatu] = useState("");
     const [soalDua, setSoalDua] = useState([]);
+    const [soalTiga, setSoalTiga] = useState("");
+    const [soalEmpat, setSoalEmpat] = useState([]);
+
     function hitung_huruf(str){
         let result = [];
         for (let i=0; i<str.length; i++){
@@ -17,10 +20,29 @@ const Tla = () => {
                 }
             }
             if (count > 0)
-            result.push(`${str[i]} = ${count}, `);
-            // console.log(`${str[i]} = ${count}`);     
+            result.push(`${str[i]} = ${count}, `); 
         }
         setSoalDua(result);
+    }
+
+    function deret_angka(arr){
+        let nilai_terbesar = 0
+        let nilai_terkecil = arr[0]
+        let rata_rata = 0
+        for (var i = 0; i < arr.length; i++){
+            if(arr[i] > nilai_terbesar){
+                nilai_terbesar = arr[i]
+            }
+            if(arr[i] < nilai_terkecil){
+                nilai_terkecil = arr[i]
+            }
+            rata_rata += Number(arr[i])
+        } 
+        var res = rata_rata/arr.length;
+        console.log(nilai_terbesar)
+        console.log(nilai_terkecil)
+        console.log(res)
+        setSoalEmpat([nilai_terbesar, nilai_terkecil, res]);
     }
 
     const onFinish = (values) => {
@@ -29,8 +51,12 @@ const Tla = () => {
 
         hitung_huruf(values.soalDua);
 
-        // console.log(jawabanDua);
+        let jawabanEmpat = values.soalEmpat.split(/[\s,]+/);
+        deret_angka(jawabanEmpat);
+
+        // console.log(jawabanEmpat);
     };
+
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -57,7 +83,7 @@ const Tla = () => {
                 rules={[
                     {
                     required: true,
-                    message: 'Please input your username!',
+                    message: 'Please input your string',
                     },
                 ]}
                 >
@@ -72,7 +98,7 @@ tersebut</p>
                 rules={[
                     {
                     required: true,
-                    message: 'Please input your username!',
+                    message: 'Please input your string',
                     },
                 ]}
                 >
@@ -87,7 +113,7 @@ inputan user</p>
                 rules={[
                     {
                     required: true,
-                    message: 'Please input your username!',
+                    message: 'Please input your numbers',
                     },
                 ]}
                 >
@@ -102,7 +128,7 @@ koma (,), ex. “20, 21, 80, 21, 55, 31, 22” ) </p>
                 rules={[
                     {
                     required: true,
-                    message: 'Please input your username!',
+                    message: 'Please input your numbers',
                     },
                 ]}
                 >
@@ -119,6 +145,12 @@ koma (,), ex. “20, 21, 80, 21, 55, 31, 22” ) </p>
             <h1>Jawaban</h1>
             <p>1. {soalSatu}</p>
             <p>2. {soalDua}</p>
+            <p>3. {soalTiga}</p>
+            <p>4. Deret angka random<ol type="a">
+                <li> Nilai terbesar = {soalEmpat[0]}</li>
+                <li> Nilai terkecil = {soalEmpat[1]}</li>
+                <li> Nilai rata-rata = {soalEmpat[2]}</li>
+            </ol></p>
 
         </>
     )
