@@ -3,22 +3,6 @@ import { Switch, Route, BrowserRouter as Router, Link } from "react-router-dom";
 import Tla from "./Tla";
 import Tpa from "./Tpa";
 
-
-const Nav = () => {
-    return (
-      <>
-        <ul>
-          <li>
-            <Link to="/tla">Tes Logika dan Algoritma</Link>
-          </li>
-          <li>
-            <Link to="/tpa">Tes Pemrograman Aplikasi</Link>
-          </li>
-        </ul>
-      </>
-    )
-}
-
 const Routes = () => {
   return (
       <Switch>
@@ -31,6 +15,5 @@ const Routes = () => {
       </Switch>
   );
 };
-
 
 export default Routes;
