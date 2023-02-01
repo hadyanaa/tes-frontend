@@ -5,9 +5,10 @@ const Tla = () => {
     const [soalSatu, setSoalSatu] = useState("");
 
     const onFinish = (values) => {
-        let jawabanSatu = values.soalSatu;
+        let jawabanSatu = values.soalSatu.toLowerCase().replace(/[^\w\s]/gi, '').replaceAll(" ", "-");
+        setSoalSatu(jawabanSatu);
 
-        console.log(values.soalSatu);
+        console.log(jawabanSatu);
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -93,6 +94,9 @@ koma (,), ex. “20, 21, 80, 21, 55, 31, 22” ) </p>
                 </Button>
                 </Form.Item>
             </Form>
+
+            <h1>Jawaban</h1>
+            <p>1. {soalSatu}</p>
 
         </>
     )
