@@ -2,6 +2,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Layout} from 'antd';
 import Routes from "../Route";
 import Navbar from './Header';
+import Footer2 from './Footer';
 const { Content} = Layout;
 
 const Main = () => {
@@ -30,7 +31,7 @@ const Main = () => {
                         </Content>
                     </Layout>
                 </Content>
-
+                <Footer2/>
             </Layout>
         </Router>
     )

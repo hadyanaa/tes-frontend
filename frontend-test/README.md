@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Clone This Github
+
+git clone https://github.com/hadyanaa/tes-frontend.git
+
+or you can visit 
+
 ## Available Scripts
 
 In the project directory, you can run:
