@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Auth/Login";
+import Profile from "./Auth/Profile";
 import Register from "./Auth/Register";
 import { UserContext } from "./Auth/UserContext";
 import EditData from "./Crud/CrudFormEdit";
@@ -33,6 +34,9 @@ const Routes = () => {
             </Route>
             <Route exact path="/tpa/lihat-data/:id">
                 {user ? <LihatData/> : <Redirect to="/"/>}
+            </Route>
+            <Route exact path="/profile">
+                {user ? <Profile/> : <Redirect to="/"/>}
             </Route>
         </Switch>
     );

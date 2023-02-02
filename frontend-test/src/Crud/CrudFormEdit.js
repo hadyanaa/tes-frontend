@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Select } from 'antd';
+import { Button, DatePicker, Form, Input, Select, message } from 'antd';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios'
 import { useHistory, useParams } from 'react-router-dom';
@@ -36,6 +36,7 @@ const EditData = () => {
         {headers: {"Authorization" : "Bearer "+ user.token}})
             .then(() => {
                 history.push("/tpa")
+                message.success('Data has been edited successfully')
             })
     };
 

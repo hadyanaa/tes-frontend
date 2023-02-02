@@ -19,13 +19,14 @@ const Navbar = () => {
     let menuUser = [
         { label: "Login", key: "/login"},
         { label: "Register", key: "/register"},
+        { label: "Profile", key: "/profile"},
         { label: "Logout", key: "/logout"}
     ]
 
     if(user) {
-        menuUser = menuUser.filter((data) => data.label === "Logout")
+        menuUser = menuUser.filter((data) => data.label === "Logout" || data.label === "Profile")
     } else {
-        menuUser = menuUser.filter((data) => data.label !== "Logout")
+        menuUser = menuUser.filter((data) => data.label !== "Logout" && data.label !== "Profile")
     } 
 
     const menuUserAuth = [

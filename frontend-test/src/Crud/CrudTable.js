@@ -1,12 +1,16 @@
 import { DeleteFilled, EditFilled, EyeFilled } from '@ant-design/icons';
-import { Button, Space, Table } from 'antd';
-import { useContext } from 'react';
+import { Button, Space, Table, Popconfirm, message } from 'antd';
+import axios from 'axios';
+import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../Auth/UserContext';
 import { CrudContext } from './CrudContext';
 
 const CrudTable = () => {
-    const [listUser,,loading] = useContext(CrudContext)
+    const [user] = useContext(UserContext)
+    const [listUser,,loading,,,setTriggerDelete] = useContext(CrudContext)
     const history = useHistory();
+
 
     const columns = [
         {
@@ -16,7 +20,7 @@ const CrudTable = () => {
             render: (text) => {
                 let index = listUser.data.indexOf(text)
                 return(
-                    <>{index+1}</>
+                    <>{index+2}</>
                 )
             }
         },
@@ -73,33 +77,45 @@ const CrudTable = () => {
         {
           title: 'Action',
           key: 'action',
-          render: (record) => (
-            <Space size="middle">
-                <Button style={{backgroundColor: "#13c2c2", color: "white"}} onClick={()=> {history.push(`/tpa/lihat-data/${record.id}`)}}>
-                    <EyeFilled />
-                </Button>
-                <Button style={{backgroundColor: "#a0d911", color: "white"}} onClick={()=> {history.push(`/tpa/edit-data/${record.id}`)}}>
-                    <EditFilled/>
-                </Button>
-                <Button style={{backgroundColor: "#f5222d", color: "white"}}>
-                    <DeleteFilled/>
-                </Button>
-            </Space>
-          ),
+          render: (record) => {
+            const confirm = (e) => {
+                axios.delete(`https://cms-admin.ihsansolusi.co.id/testapi/user/${record.id}`, {headers: {"Authorization" : "Bearer "+ user.token}}).then((res) => {
+                    setTriggerDelete(true)
+                    message.success('Data has been deleted successfully')
+                })
+            };
+              
+            const cancel = (e) => {
+                console.log(e);
+                message.error('Click on No');
+            };
+            return(
+                <Space size="middle">
+                    <Button style={{backgroundColor: "#13c2c2", color: "white"}} onClick={()=> {history.push(`/tpa/lihat-data/${record.id}`)}}>
+                        <EyeFilled />
+                    </Button>
+                    <Button style={{backgroundColor: "#a0d911", color: "white"}} onClick={()=> {history.push(`/tpa/edit-data/${record.id}`)}}>
+                        <EditFilled/>
+                    </Button>
+                    <Popconfirm
+                        title="Are you sure to delete this Data?"
+                        onConfirm={confirm}
+                        onCancel={cancel}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <Button style={{backgroundColor: "#f5222d", color: "white"}}>
+                            <DeleteFilled/>
+                        </Button>
+                    </Popconfirm>
+                </Space>
+            )
+          }
         },
     ];
-
-    const data = [
-        {
-            no: '1',
-            name: 'John Brown',
-            alamat: 'New York No. 1 Lake Park',
-            pw: 'P',
-            tanggal_lahir: '19 Maret 2000'
-        },
-    ];
+    console.log(listUser.data)
     return(
-        <Table columns={columns} dataSource={listUser.data} loading={loading} />
+        <Table rowKey='id' columns={columns} dataSource={listUser.data} loading={loading} />
     )
 }
 
