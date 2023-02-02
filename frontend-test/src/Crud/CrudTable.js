@@ -1,10 +1,16 @@
-import { Space, Table } from 'antd';
+import { DeleteFilled, EditFilled, EyeFilled } from '@ant-design/icons';
+import { Button, Space, Table } from 'antd';
 import { useContext } from 'react';
 import { CrudContext } from './CrudContext';
 
 const CrudTable = () => {
     const [listUser] = useContext(CrudContext)
     const columns = [
+        {
+            title: 'No',
+            dataIndex: 'no',
+            key: 'no',
+        },
         {
             title: 'Name',
             dataIndex: 'name',
@@ -30,8 +36,15 @@ const CrudTable = () => {
           key: 'action',
           render: (_, record) => (
             <Space size="middle">
-              <a>Invite</a>
-              <a>Delete</a>
+                <Button style={{backgroundColor: "#13c2c2", color: "white"}}>
+                    <EyeFilled />
+                </Button>
+                <Button style={{backgroundColor: "#a0d911", color: "white"}}>
+                    <EditFilled/>
+                </Button>
+                <Button style={{backgroundColor: "#f5222d", color: "white"}}>
+                    <DeleteFilled/>
+                </Button>
             </Space>
           ),
         },
@@ -39,7 +52,7 @@ const CrudTable = () => {
 
     const data = [
         {
-            key: '1',
+            no: '1',
             name: 'John Brown',
             alamat: 'New York No. 1 Lake Park',
             pw: 'P',
