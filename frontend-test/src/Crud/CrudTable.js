@@ -10,6 +10,12 @@ const CrudTable = () => {
             title: 'No',
             dataIndex: 'no',
             key: 'no',
+            render: (text) => {
+                let index = listUser.data.indexOf(text)
+                return(
+                    <>{index+1}</>
+                )
+            }
         },
         {
             title: 'Name',
@@ -18,18 +24,48 @@ const CrudTable = () => {
         },
         {
             title: 'Alamat',
-            dataIndex: 'alamat',
-            key: 'alamat',
+            dataIndex: 'address',
+            key: 'address',
         },
         {
             title: 'P/W',
-            dataIndex: 'pw',
-            key: 'pw',
+            dataIndex: 'gender',
+            key: 'gender',
+            render: (record) => {
+                if (record == "l"){
+                    return(
+                        <>Pria</>
+                    )
+                }else{
+                    return(
+                        <>Wanita</>
+                    )
+                }
+            }
         },
         {
             title: 'Tanggal Lahir',
-            dataIndex: 'tanggal_lahir',
-            key: 'tanggal_lahir',
+            dataIndex: 'born_date',
+            key: 'born_date',
+            render: (record) => {
+                var options = {dateStyle: "medium"}
+                let input = new Date(record).toLocaleString('id-ID', options);
+                return(
+                    <>{input}</>
+                )
+            }
+        },
+        {
+            title: 'Tanggal Input',
+            dataIndex: 'created_at',
+            key: 'created_at',
+            render: (record) => {
+                var options = {dateStyle: "medium", timeStyle: "short"}
+                let input = new Date(record).toLocaleString('id-ID', options);
+                return(
+                    <>{input}</>
+                )
+            }
         },
         {
           title: 'Action',
@@ -59,9 +95,8 @@ const CrudTable = () => {
             tanggal_lahir: '19 Maret 2000'
         },
     ];
-    console.log(listUser)
     return(
-        <Table columns={columns} dataSource={data}  />
+        <Table columns={columns} dataSource={listUser.data}  />
     )
 }
 

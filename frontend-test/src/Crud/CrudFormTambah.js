@@ -1,4 +1,4 @@
-import { Button, Form, Input, Select } from 'antd';
+import { Button, DatePicker, Form, Input, Select } from 'antd';
 import { useContext } from 'react';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
@@ -10,10 +10,10 @@ const TambahData = () => {
     const history = useHistory()
 
     const onFinish = (values) => {
-        console.log(values);
-        let born_date = new Date(values.born_date)
-        axios.post("https://cms-admin.ihsansolusi.co.id/testapi/user", {...values, born_date: born_date}, 
-        {headers: {"Authorization" : "Bearer "+ user.token, "Accept": "application/json", "Content-Type": "application/json"}})
+        console.log(values)
+        let formatDate = values.born_date.toISOString().split('T')[0]
+        axios.post("https://cms-admin.ihsansolusi.co.id/testapi/user", {...values, born_date: formatDate}, 
+        {headers: {"Authorization" : "Bearer "+ user.token}})
             .then(() => {
                 history.push("/tpa")
             })
@@ -50,7 +50,11 @@ const TambahData = () => {
                     {
                         required: true,
                         message: 'Please input name!'
-                    }
+                    },
+                    {
+                        min: 8,
+                        message: 'Name must be minimum 8 characters.'
+                    },
                 ]}
             >
                 <Input/>
@@ -85,11 +89,11 @@ const TambahData = () => {
                     }}
                     options={[
                         {
-                        value: 'Pria',
+                        value: 'l',
                         label: 'Pria',
                         },
                         {
-                        value: 'Wanita',
+                        value: 'p',
                         label: 'Wanita',
                         },
                     ]}
@@ -106,7 +110,7 @@ const TambahData = () => {
                     }
                 ]}
             >
-                <Input />
+                <DatePicker/>
             </Form.Item>
 
             <Form.Item
