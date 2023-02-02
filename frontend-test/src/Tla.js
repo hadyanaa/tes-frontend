@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Button, Form, Input } from 'antd';
 
 const Tla = () => {
+    const [jawaban, setJawaban] = useState(false);
     const [soalSatu, setSoalSatu] = useState("");
     const [soalDua, setSoalDua] = useState([]);
     const [soalTiga, setSoalTiga] = useState("");
@@ -53,13 +54,28 @@ const Tla = () => {
 
         let jawabanEmpat = values.soalEmpat.split(/[\s,]+/);
         deret_angka(jawabanEmpat);
-
-        // console.log(jawabanEmpat);
+        setJawaban(true);
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    const Jawaban = () => {
+        return(
+            <>
+                <h1>Jawaban</h1>
+                <p>1. {soalSatu}</p>
+                <p>2. {soalDua}</p>
+                <p>3. {soalTiga}</p>
+                <p>4. Deret angka random<ol type="a">
+                    <li> Nilai terbesar = {soalEmpat[0]}</li>
+                    <li> Nilai terkecil = {soalEmpat[1]}</li>
+                    <li> Nilai rata-rata = {soalEmpat[2]}</li>
+                </ol></p>
+            </>
+        )
+    }
 
     return(
         <>
@@ -142,16 +158,7 @@ koma (,), ex. “20, 21, 80, 21, 55, 31, 22” ) </p>
                 </Form.Item>
             </Form>
 
-            <h1>Jawaban</h1>
-            <p>1. {soalSatu}</p>
-            <p>2. {soalDua}</p>
-            <p>3. {soalTiga}</p>
-            <p>4. Deret angka random<ol type="a">
-                <li> Nilai terbesar = {soalEmpat[0]}</li>
-                <li> Nilai terkecil = {soalEmpat[1]}</li>
-                <li> Nilai rata-rata = {soalEmpat[2]}</li>
-            </ol></p>
-
+            {jawaban ? <Jawaban/> : ''}
         </>
     )
 }

@@ -48,7 +48,7 @@ const CrudTable = () => {
     ];
     console.log(listUser)
     return(
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={data}  />
     )
 }
 
