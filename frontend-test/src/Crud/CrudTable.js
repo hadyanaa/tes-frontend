@@ -75,7 +75,7 @@ const CrudTable = () => {
           key: 'action',
           render: (record) => (
             <Space size="middle">
-                <Button style={{backgroundColor: "#13c2c2", color: "white"}}>
+                <Button style={{backgroundColor: "#13c2c2", color: "white"}} onClick={()=> {history.push(`/tpa/lihat-data/${record.id}`)}}>
                     <EyeFilled />
                 </Button>
                 <Button style={{backgroundColor: "#a0d911", color: "white"}} onClick={()=> {history.push(`/tpa/edit-data/${record.id}`)}}>
