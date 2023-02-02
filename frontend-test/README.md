@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 git clone https://github.com/hadyanaa/tes-frontend.git
 
-or you can visit 
+or you can visit https://tes-frontend-hadyan.netlify.app/ to see this project
 
 ## Available Scripts
 
