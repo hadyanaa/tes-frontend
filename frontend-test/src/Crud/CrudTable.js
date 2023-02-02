@@ -1,10 +1,13 @@
 import { DeleteFilled, EditFilled, EyeFilled } from '@ant-design/icons';
 import { Button, Space, Table } from 'antd';
 import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { CrudContext } from './CrudContext';
 
 const CrudTable = () => {
-    const [listUser] = useContext(CrudContext)
+    const [listUser,,loading] = useContext(CrudContext)
+    const history = useHistory();
+
     const columns = [
         {
             title: 'No',
@@ -70,12 +73,12 @@ const CrudTable = () => {
         {
           title: 'Action',
           key: 'action',
-          render: (_, record) => (
+          render: (record) => (
             <Space size="middle">
                 <Button style={{backgroundColor: "#13c2c2", color: "white"}}>
                     <EyeFilled />
                 </Button>
-                <Button style={{backgroundColor: "#a0d911", color: "white"}}>
+                <Button style={{backgroundColor: "#a0d911", color: "white"}} onClick={()=> {history.push(`/tpa/edit-data/${record.id}`)}}>
                     <EditFilled/>
                 </Button>
                 <Button style={{backgroundColor: "#f5222d", color: "white"}}>
@@ -96,7 +99,7 @@ const CrudTable = () => {
         },
     ];
     return(
-        <Table columns={columns} dataSource={listUser.data}  />
+        <Table columns={columns} dataSource={listUser.data} loading={loading} />
     )
 }
 

@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import { UserContext } from "./Auth/UserContext";
+import EditData from "./Crud/CrudFormEdit";
 import TambahData from "./Crud/CrudFormTambah";
 import Tla from "./Tla";
 import Tpa from "./Tpa";
@@ -25,6 +26,9 @@ const Routes = () => {
             </Route>
             <Route exact path="/tpa/tambah-data">
                 {user ? <TambahData/> : <Redirect to="/"/>}
+            </Route>
+            <Route exact path="/tpa/edit-data/:id">
+                {user ? <EditData/> : <Redirect to="/"/>}
             </Route>
         </Switch>
     );
